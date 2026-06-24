@@ -19,11 +19,51 @@
 
 
 
-
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+
 function Contact() {
+
+
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+});
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/contact",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    const data = await response.json();
+
+    alert("Message Sent Successfully");
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
   return (
     <>
       <Navbar />
@@ -143,13 +183,19 @@ function Contact() {
     </div>
 
     {/* Premium Form Wrapper Box */}
-    <form className="bg-white border border-orange-100/80 rounded-[32px] p-6 md:p-12 shadow-md">
+    <form
+  onSubmit={handleSubmit}
+  className="bg-white border border-orange-100/80 rounded-[32px] p-6 md:p-12 shadow-md"
+>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* Full Name Input */}
         <div className="flex flex-col">
           <input
             type="text"
+             name="name"
+  value={formData.name}
+  onChange={handleChange}
             placeholder="Full Name"
             className="w-full bg-orange-50/40 border border-stone-200 text-stone-800 placeholder-stone-400 p-4 rounded-xl outline-none focus:border-amber-600 focus:bg-white transition duration-200 text-sm md:text-base"
           />
@@ -159,6 +205,9 @@ function Contact() {
         <div className="flex flex-col">
           <input
             type="email"
+              name="email"
+  value={formData.email}
+  onChange={handleChange}
             placeholder="Email Address"
             className="w-full bg-orange-50/40 border border-stone-200 text-stone-800 placeholder-stone-400 p-4 rounded-xl outline-none focus:border-amber-600 focus:bg-white transition duration-200 text-sm md:text-base"
           />
@@ -168,6 +217,9 @@ function Contact() {
         <div className="flex flex-col">
           <input
             type="text"
+              name="phone"
+  value={formData.phone}
+  onChange={handleChange}
             placeholder="Phone Number"
             className="w-full bg-orange-50/40 border border-stone-200 text-stone-800 placeholder-stone-400 p-4 rounded-xl outline-none focus:border-amber-600 focus:bg-white transition duration-200 text-sm md:text-base"
           />
@@ -212,6 +264,9 @@ function Contact() {
       <div className="mt-6">
         <textarea
           rows="5"
+            name="message"
+  value={formData.message}
+  onChange={handleChange} 
           placeholder="Describe your project requirements..."
           className="w-full bg-orange-50/40 border border-stone-200 text-stone-800 placeholder-stone-400 p-4 rounded-xl outline-none focus:border-amber-600 focus:bg-white transition duration-200 text-sm md:text-base resize-none"
       	></textarea>

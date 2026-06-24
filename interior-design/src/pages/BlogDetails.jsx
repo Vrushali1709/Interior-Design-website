@@ -1,18 +1,31 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { blogs } from "./Blog";
+import { useEffect, useState } from "react";
+import api from "../api";
 
 function BlogDetails() {
+
   const { id } = useParams();
 
-  const blog = blogs.find(
-    (item) => item.id === Number(id)
-  );
+const [blog, setBlog] = useState(null);
 
-  if (!blog) {
-    return <h1>Blog not found</h1>;
-  }
+useEffect(() => {
+  api
+    .get(`/blogs/${id}`)
+    .then((res) => {
+      setBlog(res.data);
+    })
+    .catch((err) => console.log(err));
+}, [id]);
+
+  // const blog = blogs.find(
+  //   (item) => item.id === Number(id)
+  // );
+
+ if (!blog) {
+  return <h1>Loading...</h1>;
+}
 
   return (
     <>

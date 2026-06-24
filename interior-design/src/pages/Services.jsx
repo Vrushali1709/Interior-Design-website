@@ -1,101 +1,118 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Interior10 from "../assets/interior10.jpg";
-import Interior11 from "../assets/interior11.jpg";
-import Interior12 from "../assets/interior12.jpg";
-import Interior13 from "../assets/interior13.jpg";
-import Interior14 from "../assets/interior14.jpg";
-import Interior15 from "../assets/interior15.jpg";
+// import Interior11 from "../assets/interior11.jpg";
+// import Interior12 from "../assets/interior12.jpg";
+// import Interior13 from "../assets/interior13.jpg";
+// import Interior14 from "../assets/interior14.jpg";
+// import Interior15 from "../assets/interior15.jpg";
 import { useNavigate } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
+import api from "../api";
 
 function Services() {
+const [services, setServices] = useState([]);
 
+
+
+
+useEffect(() => {
+  api
+    .get("/services")
+    .then((res) => {
+      setServices(res.data);
+    })
+    .catch((err) => console.log(err));
+}, []);
    const navigate = useNavigate();
 
-   const services = [
-  {
-    id: "residential",
-    title: "Residential Design",
-    desc: "Custom living rooms, bedrooms, dining spaces and complete home interiors designed with luxury, comfort and functionality.",
-    icon: "🏠",
-    image: Interior10,
-    features: [
-      "Luxury Living Rooms",
-      "Custom Furniture",
-      "Space Planning",
-      "Premium Materials",
-    ],
-  },
-  {
-    id: "commercial",
-    title: "Commercial Design",
-    desc: "Modern offices, retail stores, restaurants and corporate spaces designed to enhance productivity and brand identity.",
-    icon: "🏢",
-    image: Interior11,
-    features: [
-      "Office Interiors",
-      "Retail Spaces",
-      "Corporate Design",
-      "Workspace Planning",
-    ],
-  },
-  {
-    id: "kitchen",
-    title: "Kitchen Design",
-    desc: "Custom modular kitchens with intelligent storage and elegant layouts.",
-    icon: "🍽️",
-    image: Interior12,
-    features: [
-      "Modular Kitchen",
-      "Smart Storage",
-      "Premium Finishes",
-      "Modern Layout",
-    ],
-  },
-  {
-    id: "bathroom",
-    title: "Bathroom Design",
-    desc: "Luxury bathrooms featuring premium fixtures and spa-inspired comfort.",
-    icon: "🚿",
-    image: Interior13,
-    features: [
-      "Luxury Fixtures",
-      "Modern Design",
-      "Elegant Lighting",
-      "Space Optimization",
-    ],
-  },
-  {
-    id: "turnkey",
-    title: "Turnkey Projects",
-    desc: "Complete end-to-end execution from concept to final delivery.",
-    icon: "🛠️",
-    image: Interior14,
-    features: [
-      "Design Planning",
-      "Material Procurement",
-      "Execution",
-      "Final Handover",
-    ],
-  },
-  {
-    id: "visualization",
-    title: "3D Visualization",
-    desc: "Realistic 3D renders to visualize your dream space before execution.",
-    icon: "🎨",
-    image: Interior15,
-    features: [
-      "3D Renders",
-      "Walkthrough Views",
-      "Material Preview",
-      "Client Presentation",
-    ],
-  },
-];
+//    const services = [
+//   {
+//     id: "residential",
+//     title: "Residential Design",
+//     desc: "Custom living rooms, bedrooms, dining spaces and complete home interiors designed with luxury, comfort and functionality.",
+//     icon: "🏠",
+//     image: Interior10,
+//     features: [
+//       "Luxury Living Rooms",
+//       "Custom Furniture",
+//       "Space Planning",
+//       "Premium Materials",
+//     ],
+//   },
+//   {
+//     id: "commercial",
+//     title: "Commercial Design",
+//     desc: "Modern offices, retail stores, restaurants and corporate spaces designed to enhance productivity and brand identity.",
+//     icon: "🏢",
+//     image: Interior11,
+//     features: [
+//       "Office Interiors",
+//       "Retail Spaces",
+//       "Corporate Design",
+//       "Workspace Planning",
+//     ],
+//   },
+//   {
+//     id: "kitchen",
+//     title: "Kitchen Design",
+//     desc: "Custom modular kitchens with intelligent storage and elegant layouts.",
+//     icon: "🍽️",
+//     image: Interior12,
+//     features: [
+//       "Modular Kitchen",
+//       "Smart Storage",
+//       "Premium Finishes",
+//       "Modern Layout",
+//     ],
+//   },
+//   {
+//     id: "bathroom",
+//     title: "Bathroom Design",
+//     desc: "Luxury bathrooms featuring premium fixtures and spa-inspired comfort.",
+//     icon: "🚿",
+//     image: Interior13,
+//     features: [
+//       "Luxury Fixtures",
+//       "Modern Design",
+//       "Elegant Lighting",
+//       "Space Optimization",
+//     ],
+//   },
+//   {
+//     id: "turnkey",
+//     title: "Turnkey Projects",
+//     desc: "Complete end-to-end execution from concept to final delivery.",
+//     icon: "🛠️",
+//     image: Interior14,
+//     features: [
+//       "Design Planning",
+//       "Material Procurement",
+//       "Execution",
+//       "Final Handover",
+//     ],
+//   },
+//   {
+//     id: "visualization",
+//     title: "3D Visualization",
+//     desc: "Realistic 3D renders to visualize your dream space before execution.",
+//     icon: "🎨",
+//     image: Interior15,
+//     features: [
+//       "3D Renders",
+//       "Walkthrough Views",
+//       "Material Preview",
+//       "Client Presentation",
+//     ],
+//   },
+// ];
   return (
     <>
       <Navbar />
+{/* 
+      <h1 className="text-5xl text-red-500">
+  {services.length}
+</h1> */}
 
 <section className="relative min-h-screen md:h-[85vh] flex items-center justify-center overflow-hidden bg-orange-50">
 

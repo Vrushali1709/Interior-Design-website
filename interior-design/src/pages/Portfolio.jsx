@@ -17,56 +17,34 @@
 // export default Portfolio;
 
 
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import { projects } from "../data/projectsData";
+import React, { useState, useEffect } from "react";
+// import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Panthhouse from "../assets/panthhouse.jpg"
 import Footer from "../components/Footer";
-// import Interior1 from "../assets/interior1.jpg";
 import Interior2 from "../assets/interior2.jpg";
-// import Interior3 from "../assets/interior3.jpg";
-// import Interior4 from "../assets/interior4.jpg";
-// import Interior5 from "../assets/interior5.jpg";
-// import Interior6 from "../assets/interior6.jpg";
-import { useNavigate } from "react-router-dom";
-import { projects } from "../data/projectsData";
+
+
+import api from "../api";
 
 function Portfolio() {
 
   const navigate = useNavigate();
 
-//   const projects = [
-//   {
-//      id: 1,
-//     title: "Luxury Living Room",
-//     type: "Residential",
-//     area: "2,500 sq.ft",
-//     budget: "Premium",
-//     before: Interior1,
-//     after: Interior2,
-//     desc: "A sophisticated residential transformation featuring elegant furnishings, ambient lighting and timeless aesthetics.",
-//   },
-//   {
-//         id: 2,
-//     title: "Modern Office Space",
-//     type: "Commercial",
-//     area: "4,000 sq.ft",
-//     budget: "Luxury",
-//     before: Interior3,
-//     after: Interior4,
-//     desc: "A productive and inspiring workplace designed with modern layouts and premium finishes.",
-//   },
-//   {
-//       id: 3,
-//     title: "Modular Kitchen",
-//     type: "Kitchen",
-//     area: "350 sq.ft",
-//     budget: "Standard",
-//     before: Interior5,
-//     after: Interior6,
-//     desc: "Smart storage solutions combined with contemporary materials and functional elegance.",
-//   },
-// ];
+const [projects, setProjects] = useState([]);
 const [selectedCategory, setSelectedCategory] = useState("All");
+
+
+useEffect(() => {
+  api
+    .get("/projects")
+    .then((res) => {
+      setProjects(res.data);
+    })
+    .catch((err) => console.log(err));
+}, []);
 
   // Yahan logic add ki hai jo category ke hisaab se filter karega
   const filteredProjects = selectedCategory === "All" 
@@ -261,7 +239,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
       {filteredProjects.map((project, index) => (
 
         <div
-          key={index}
+         key={project._id}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center rounded-[32px] overflow-hidden bg-white/60 border border-orange-100/70 p-4 md:p-6 shadow-sm backdrop-blur-sm"
         >
 
