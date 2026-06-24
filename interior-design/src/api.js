@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://interior-design-website-zq6j.onrender.com/",
+  baseURL: "https://interior-design-backend.onrender.com/api",
 });
 
 export default api;
