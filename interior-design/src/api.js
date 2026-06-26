@@ -18,11 +18,20 @@
 
 
 
+// import axios from "axios";
+
+// const api = axios.create({
+// // baseURL: "https://interior-design-backend-flag.onrender.com/api",
+//    baseURL: "http://localhost:5000/api",
+// });
+
+// export default api;
+
+
 import axios from "axios";
 
 const api = axios.create({
-// baseURL: "https://interior-design-backend-flag.onrender.com/api",
-   baseURL: "http://localhost:5000/api",
+  baseURL: "https://interior-design-backend-eep5.onrender.com/api",
 });
 
 export default api;
